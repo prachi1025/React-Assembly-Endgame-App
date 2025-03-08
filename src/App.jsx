@@ -20,7 +20,6 @@ export default function App() {
   const wrongGuessesCount = userGuesses.filter(guess => !currentWord.includes(guess)).length
   // console.log(wrongGuessesCount)
 
-
   function keyPress(alphabet) {
     setUserGuesses(prevUserGuesses => 
       prevUserGuesses.includes(alphabet) ? prevUserGuesses : [...prevUserGuesses, alphabet])
@@ -54,7 +53,12 @@ export default function App() {
       <span className={clsx("language-chip", { lost: isLost })} style={{ backgroundColor:language.backgroundColor, color:language.color}} key={language.name}>{language.name}</span>
     )
   })
-  
+
+  const isGameLost = wrongGuessesCount  >=(languageChips.length - 1) ? true : false
+
+  const isGameWon = Array.from(currentWord).every(alphabet => userGuesses.includes(alphabet))
+
+  const isGameOver = isGameLost || isGameWon
 
   return (
     <main>
@@ -64,9 +68,11 @@ export default function App() {
         <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
         </header>
 
-        <section className="game-status-won">
-          <h2>You win!</h2>
-          <p>Well done! 🎉</p>
+        <section className={clsx("game-status", {"game-won": isGameWon, "game-lost": isGameLost})}>
+          {isGameWon ? <><h2>You win!</h2>
+          <p>Well done! 🎉</p> </> : null}
+          {isGameLost ? <><h2>Game over!</h2>
+            <p>You lose! Better start learning Assembly 😭</p> </> : null}
         </section>
       </div>
       
@@ -82,7 +88,7 @@ export default function App() {
         {keyboard}
       </div>
       
-      <button className="new-game">New Game</button>
+      {isGameOver && <button className="new-game">New Game</button>}
 
     </main>
   )
