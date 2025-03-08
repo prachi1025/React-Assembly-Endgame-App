@@ -96,7 +96,7 @@ div.language-container {
     flex-wrap: wrap;
 }
 
-div.language-container .language-chip {
+span.language-chip {
     border-radius: 3px;
     text-align: center;
     font-size: 12px;
@@ -109,6 +109,22 @@ div.language-container .language-chip {
     justify-content: center;
     align-items: center;
     gap: 4.5px;
+    position: relative;
+}
+
+/* Dimmed overlay with skull on "lost" languages */
+span.language-chip.lost::before {
+    content: "💀";
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    font-size: 0.85rem;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 div.game-word-container {

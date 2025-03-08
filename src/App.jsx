@@ -3,17 +3,28 @@ import React from "react"
 import clsx from "clsx"
 
 export default function App() {
-
+  // State Values
   const [currentWord, setCurrentWord] = React.useState("react")
-
   const [userGuesses, setUserGuesses] = React.useState([])
 
-  function keyPress(alph) {
-    setUserGuesses(prevUserGuesses => 
-      prevUserGuesses.includes(alph) ? prevUserGuesses : [...prevUserGuesses, alph])
-  }
+  //dervied value (my method)
+  // let wrongGuessCount = 0
+  // for (let i = 0 ; i < userGuesses.length ; i++) {
+  //   if (!currentWord.includes(userGuesses[i])) {
+  //     wrongGuessCount = wrongGuessCount + 1
+  //   }
+  // }
+  // console.log(wrongGuessCount)
 
-  console.log(userGuesses)
+  // derived value (tutor method) (both method work same)
+  const wrongGuessesCount = userGuesses.filter(guess => !currentWord.includes(guess)).length
+  // console.log(wrongGuessesCount)
+
+
+  function keyPress(alphabet) {
+    setUserGuesses(prevUserGuesses => 
+      prevUserGuesses.includes(alphabet) ? prevUserGuesses : [...prevUserGuesses, alphabet])
+  }
 
   //keyboard on the screen
   const alphabets = "abcdefghijklmnopqrstuvwxyz"
@@ -36,8 +47,14 @@ export default function App() {
     </span> 
     )
   
-  //language chips on the page
-  const languageChips = languages.map(language => <span className={"language-chip"} style={{ backgroundColor:language.backgroundColor, color:language.color}} key={language.name}>{language.name}</span>)
+  //language chips on the page (has the functionality of adding skull overlay to lost languages as we guess wrong alphabets)
+  const languageChips = languages.map((language, index) => {
+    const isLost = index < wrongGuessesCount ? true : false
+    return ( 
+      <span className={clsx("language-chip", { lost: isLost })} style={{ backgroundColor:language.backgroundColor, color:language.color}} key={language.name}>{language.name}</span>
+    )
+  })
+  
 
   return (
     <main>
