@@ -18,6 +18,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 36px
 }
 
 div.top-div {
@@ -91,7 +92,6 @@ div.language-container {
     align-content: flex-start;
     gap: 1.5px;
     flex-wrap: wrap;
-    margin-top: 36px;
 }
 
 div.language-container .language-chip {
@@ -107,4 +107,28 @@ div.language-container .language-chip {
     justify-content: center;
     align-items: center;
     gap: 4.5px;
+}
+
+div.game-word-container {
+   display:flex;
+   flex-direction: row;
+   gap: 6px;
+   max-height: 40px;
+   flex-wrap: wrap;
+}
+
+span.game-word {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    padding: 6px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid #F9F4DA;
+    background: #323232;
+    font-size: 18px;
+    color: #F9F4DA;
+    font-weight: 700;
 }
