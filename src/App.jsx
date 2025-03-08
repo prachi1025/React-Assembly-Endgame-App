@@ -5,9 +5,14 @@ export default function App() {
 
   const [currentWord, setCurrentWord] = React.useState("react")
 
+  //keyboard on the screen
+  const alphabets = "abcdefghijklmnopqrstuvwxyz"
+  const keyboard = Array.from(alphabets).map((alphabet, index) => 
+  <button className="key" key={index}>{alphabet.toUpperCase()}</button>)
+
   //current word in jsx on the page
   const gameWord = Array.from(currentWord).map((word, index) => 
-    <span key={index} className="game-word">{word.toLocaleUpperCase()}</span> 
+    <span key={index} className="game-word">{word.toUpperCase()}</span> 
     )
   
   //language chips on the page
@@ -34,6 +39,12 @@ export default function App() {
       <div className="game-word-container">
         {gameWord}
       </div>
+      
+      <div className="keyboard-container">
+        {keyboard}
+      </div>
+      
+      <button className="new-game">New Game</button>
       
     </main>
   )
