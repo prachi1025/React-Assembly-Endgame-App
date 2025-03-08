@@ -5,10 +5,19 @@ export default function App() {
 
   const [currentWord, setCurrentWord] = React.useState("react")
 
+  const [userGuesses, setUserGuesses] = React.useState([])
+
+  function keyPress(alph) {
+    setUserGuesses(prevUserGuesses => 
+      prevUserGuesses.includes(alph) ? prevUserGuesses : [...prevUserGuesses, alph])
+  }
+
+  console.log(userGuesses)
+
   //keyboard on the screen
   const alphabets = "abcdefghijklmnopqrstuvwxyz"
   const keyboard = Array.from(alphabets).map((alphabet, index) => 
-  <button className="key" key={index}>{alphabet.toUpperCase()}</button>)
+  <button onClick={() => keyPress(alphabet)}className="key" key={index}>{alphabet.toUpperCase()}</button>)
 
   //current word in jsx on the page
   const gameWord = Array.from(currentWord).map((word, index) => 
@@ -45,7 +54,7 @@ export default function App() {
       </div>
       
       <button className="new-game">New Game</button>
-      
+
     </main>
   )
 }
