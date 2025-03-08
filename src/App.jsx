@@ -19,7 +19,7 @@ export default function App() {
   const alphabets = "abcdefghijklmnopqrstuvwxyz"
   const keyboard = Array.from(alphabets).map((alphabet, index) => {
     const isGuessed = userGuesses.includes(alphabet) 
-    const isCorrect = Array.from(currentWord).includes(alphabet)
+    const isCorrect = currentWord.includes(alphabet)
     return (
       <button onClick={() => keyPress(alphabet)} className={clsx("key", {
         "correct": isGuessed && isCorrect,
@@ -29,9 +29,11 @@ export default function App() {
   } )
   
 
-  //current word in jsx on the page
-  const gameWord = Array.from(currentWord).map((word, index) => 
-    <span key={index} className="game-word">{word.toUpperCase()}</span> 
+  //current word in jsx on the page (only shows the alphabets that are guessed)
+  const gameWord = Array.from(currentWord).map((alphabet, index) => 
+    <span key={index} className="game-word">
+      {userGuesses.includes(alphabet) ? alphabet.toUpperCase() : ""} 
+    </span> 
     )
   
   //language chips on the page
