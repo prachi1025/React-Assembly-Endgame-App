@@ -177,3 +177,11 @@ button.new-game {
     margin-inline: auto;
     cursor: pointer;
 }
+
+.correct {
+    background-color: #10A95B !important;
+}
+
+.wrong {
+    background-color: #EC5D49 !important;
+}

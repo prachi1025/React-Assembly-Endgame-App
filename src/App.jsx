@@ -1,5 +1,6 @@
 import { languages } from "./assets/languages"
 import React from "react"
+import clsx from "clsx"
 
 export default function App() {
 
@@ -16,8 +17,17 @@ export default function App() {
 
   //keyboard on the screen
   const alphabets = "abcdefghijklmnopqrstuvwxyz"
-  const keyboard = Array.from(alphabets).map((alphabet, index) => 
-  <button onClick={() => keyPress(alphabet)}className="key" key={index}>{alphabet.toUpperCase()}</button>)
+  const keyboard = Array.from(alphabets).map((alphabet, index) => {
+    const isGuessed = userGuesses.includes(alphabet) 
+    const isCorrect = Array.from(currentWord).includes(alphabet)
+    return (
+      <button onClick={() => keyPress(alphabet)} className={clsx("key", {
+        "correct": isGuessed && isCorrect,
+        "wrong": isGuessed && !isCorrect
+      })} key={index}>{alphabet.toUpperCase()}</button>
+    )
+  } )
+  
 
   //current word in jsx on the page
   const gameWord = Array.from(currentWord).map((word, index) => 
