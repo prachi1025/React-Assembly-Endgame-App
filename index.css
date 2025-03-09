@@ -134,7 +134,7 @@ div.game-word-container {
    flex-wrap: wrap;
 }
 
-span.game-word {
+div.game-word-container span.game-word {
     display: flex;
     width: 40px;
     height: 40px;
@@ -211,4 +211,8 @@ section.game-status.game-lost {
 
 section.game-status.guess-incorrect {
     background-color: #7A5EA7;
+}
+
+div.game-word-container span.game-word.missed-letter {
+    color: #EC5D49 !important;
 }

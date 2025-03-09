@@ -50,14 +50,9 @@ export default function App() {
   
 
   //current word in jsx on the page (only shows the alphabets that are guessed)
-  const gameWord = isGameOver && isGameLost ? Array.from(currentWord).map((alphabet, index) => 
-    <span key={index} className="game-word">
-      {alphabet.toUpperCase()} 
-    </span> 
-    ) :
-    Array.from(currentWord).map((alphabet, index) => 
-      <span key={index} className="game-word">
-        {userGuesses.includes(alphabet) ? alphabet.toUpperCase() : ""} 
+  const gameWord = Array.from(currentWord).map((alphabet, index) => 
+      <span key={index} className={clsx("game-word" , {"missed-letter": isGameLost && !userGuesses.includes(alphabet)})}>
+        {isGameLost || userGuesses.includes(alphabet) ? alphabet.toUpperCase() : ""} 
       </span> 
       )
   
