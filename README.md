@@ -10,7 +10,7 @@ Assembly Endgame is a word-guessing game where you must identify a random word b
 - Win by guessing the word before running out of chances.
 - **Lose all 8 chances**, and Assembly takes over the world!
 
-
+## Play at [Assembly Endgame](https://prachi1025.github.io/React-Assembly-Endgame-App/)
 ## Gameplay Screenshots
 
 ![gameplay](./public/screenshots/first.png)
