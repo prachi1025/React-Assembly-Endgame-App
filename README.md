@@ -1,12 +1,41 @@
-# React + Vite
+# Assembly Endgame
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Assembly Endgame is a word-guessing game where you must identify a random word before all programming languages are wiped out, leaving only **Assembly**! You have **8 wrong attempts**—choose wisely.
 
-Currently, two official plugins are available:
+## Gameplay
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- A **random word** is generated at the start of the game.
+- Players interact using **on-screen buttons** to guess letters.
+- Each wrong guess eliminates a programming language.
+- Win by guessing the word before running out of chances.
+- **Lose all 8 chances**, and Assembly takes over the world!
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Gameplay Screenshots
+
+![gameplay](./public/screenshots/first.png)
+
+![gameplay](./public/screenshots/second.png)
+
+![gameplay](./public/screenshots/third.png)
+
+![gameplay](./public/screenshots/fourth.png)
+
+## Features
+
+- 🎯 **On-screen keyboard** for letter selection.
+- 🎉 **Confetti effect** when you win.
+- 🔄 **New Game button** appears after a win.
+- 😞 **Custom message** when you lose.
+- 🎨 **Styled with dynamic classnames (`clsx`)**.
+- ⚛️ **Built with React (Vite) and external libraries**.
+
+## Technologies Used
+
+- **React (Vite)**
+- **clsx** (for conditional classnames)
+- **react-confetti** (for the victory celebration)
+
+---
+
+Can you stop Assembly from taking over? Start guessing now!

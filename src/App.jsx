@@ -2,8 +2,29 @@ import { languages } from "./assets/languages"
 import React from "react"
 import clsx from "clsx"
 import { getFarewellText, getRandomWord} from "./assets/utils"
+import Confetti from "react-confetti"
 
 export default function App() {
+
+  const [windowSize, setWindowSize] = React.useState({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
+  
+    React.useEffect(() => {
+        function handleResize() {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight
+            });
+        }
+  
+        window.addEventListener("resize", handleResize);
+  
+        // Cleanup function to remove event listener
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
   // State Values
   const [currentWord, setCurrentWord] = React.useState(() => getRandomWord())
   const [userGuesses, setUserGuesses] = React.useState([])
@@ -103,6 +124,7 @@ export default function App() {
 
   return (
     <main>
+      {isGameWon && <Confetti width={windowSize.width} height={windowSize.height}/>}
       <div className="top-div">
         <header>
         <h1>Assembly: Endgame</h1>
