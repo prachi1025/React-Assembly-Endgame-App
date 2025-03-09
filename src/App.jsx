@@ -1,11 +1,11 @@
 import { languages } from "./assets/languages"
 import React from "react"
 import clsx from "clsx"
-import { getFarewellText } from "./assets/utils"
+import { getFarewellText, getRandomWord} from "./assets/utils"
 
 export default function App() {
   // State Values
-  const [currentWord, setCurrentWord] = React.useState("react")
+  const [currentWord, setCurrentWord] = React.useState(() => getRandomWord())
   const [userGuesses, setUserGuesses] = React.useState([])
 
   //dervied value (my method)
@@ -94,7 +94,11 @@ export default function App() {
   const lastUserGuess = userGuesses[userGuesses.length - 1]
 
   const isLastUserGuessIncorrect = lastUserGuess && !currentWord.includes(lastUserGuess)
-  
+
+  function resetGame() {
+    setCurrentWord(getRandomWord())
+    setUserGuesses([])
+  }
   return (
     <main>
       <div className="top-div">
@@ -120,7 +124,7 @@ export default function App() {
         {keyboard}
       </div>
       
-      {isGameOver && <button className="new-game">New Game</button>}
+      {isGameOver && <button className="new-game" onClick={resetGame}>New Game</button>}
 
     </main>
   )
