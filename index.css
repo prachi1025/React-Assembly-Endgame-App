@@ -201,10 +201,14 @@ button.new-game {
     background-color: #EC5D49 !important;
 }
 
-.game-won {
-    background-color: #10A95B !important;
+section.game-status.game-won {
+    background-color: #10A95B;
 }
 
-.game-lost {
-    background-color: #BA2A2A !important;
+section.game-status.game-lost {
+    background-color: #BA2A2A;
+}
+
+section.game-status.guess-incorrect {
+    background-color: #7A5EA7;
 }

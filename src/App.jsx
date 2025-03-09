@@ -1,6 +1,7 @@
 import { languages } from "./assets/languages"
 import React from "react"
 import clsx from "clsx"
+import { getFarewellText } from "./assets/utils"
 
 export default function App() {
   // State Values
@@ -21,8 +22,10 @@ export default function App() {
   // console.log(wrongGuessesCount)
 
   function keyPress(alphabet) {
-    setUserGuesses(prevUserGuesses => 
+    if (!isGameOver) {
+      setUserGuesses(prevUserGuesses => 
       prevUserGuesses.includes(alphabet) ? prevUserGuesses : [...prevUserGuesses, alphabet])
+    }
   }
 
   //keyboard on the screen
@@ -60,6 +63,38 @@ export default function App() {
 
   const isGameOver = isGameLost || isGameWon
 
+  function renderGameStatus() {
+    if(!isGameOver && isLastUserGuessIncorrect) { 
+      return (
+        <>
+          <h2> {getFarewellText(languages[wrongGuessesCount - 1].name)} </h2>
+        </>
+      )
+    } 
+    if(isGameWon) {
+      return (
+        <>
+          <h2>You win!</h2>
+          <p>Well done! 🎉</p>
+        </>
+      )
+    }
+    if (isGameLost) {
+      return (
+        <>
+          <h2>Game over!</h2>
+          <p>You lose! Better start learning Assembly 😭</p>
+        </>
+      )
+    }
+
+    return null
+  }
+
+  const lastUserGuess = userGuesses[userGuesses.length - 1]
+
+  const isLastUserGuessIncorrect = lastUserGuess && !currentWord.includes(lastUserGuess)
+  
   return (
     <main>
       <div className="top-div">
@@ -68,11 +103,8 @@ export default function App() {
         <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
         </header>
 
-        <section className={clsx("game-status", {"game-won": isGameWon, "game-lost": isGameLost})}>
-          {isGameWon ? <><h2>You win!</h2>
-          <p>Well done! 🎉</p> </> : null}
-          {isGameLost ? <><h2>Game over!</h2>
-            <p>You lose! Better start learning Assembly 😭</p> </> : null}
+        <section className={clsx("game-status", {"game-won": isGameWon, "game-lost": isGameLost, "guess-incorrect": isLastUserGuessIncorrect})}>
+          {renderGameStatus()}
         </section>
       </div>
       
