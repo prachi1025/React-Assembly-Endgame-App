@@ -21,6 +21,13 @@ export default function App() {
   const wrongGuessesCount = userGuesses.filter(guess => !currentWord.includes(guess)).length
   // console.log(wrongGuessesCount)
 
+  const isGameLost = wrongGuessesCount  >=(languages.length - 1) ? true : false
+
+  const isGameWon = Array.from(currentWord).every(alphabet => userGuesses.includes(alphabet))
+
+  const isGameOver = isGameLost || isGameWon
+
+
   function keyPress(alphabet) {
     if (!isGameOver) {
       setUserGuesses(prevUserGuesses => 
@@ -43,11 +50,16 @@ export default function App() {
   
 
   //current word in jsx on the page (only shows the alphabets that are guessed)
-  const gameWord = Array.from(currentWord).map((alphabet, index) => 
+  const gameWord = isGameOver && isGameLost ? Array.from(currentWord).map((alphabet, index) => 
     <span key={index} className="game-word">
-      {userGuesses.includes(alphabet) ? alphabet.toUpperCase() : ""} 
+      {alphabet.toUpperCase()} 
     </span> 
-    )
+    ) :
+    Array.from(currentWord).map((alphabet, index) => 
+      <span key={index} className="game-word">
+        {userGuesses.includes(alphabet) ? alphabet.toUpperCase() : ""} 
+      </span> 
+      )
   
   //language chips on the page (has the functionality of adding skull overlay to lost languages as we guess wrong alphabets)
   const languageChips = languages.map((language, index) => {
@@ -56,12 +68,6 @@ export default function App() {
       <span className={clsx("language-chip", { lost: isLost })} style={{ backgroundColor:language.backgroundColor, color:language.color}} key={language.name}>{language.name}</span>
     )
   })
-
-  const isGameLost = wrongGuessesCount  >=(languageChips.length - 1) ? true : false
-
-  const isGameWon = Array.from(currentWord).every(alphabet => userGuesses.includes(alphabet))
-
-  const isGameOver = isGameLost || isGameWon
 
   function renderGameStatus() {
     if(!isGameOver && isLastUserGuessIncorrect) { 
@@ -99,6 +105,7 @@ export default function App() {
     setCurrentWord(getRandomWord())
     setUserGuesses([])
   }
+
   return (
     <main>
       <div className="top-div">
